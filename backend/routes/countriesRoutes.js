@@ -1,39 +1,22 @@
-// const express = require('express');
-// import countries from './countryList.js';
+import express from 'express';
+import {getALlCountries,getOneCountry,createCountry, updateCountry, deleteCountry} from '../controllers/countriesControllers.js';
 
-// const { body } = require('express-validator');
-// const {
-//   getAll,
-//   getOne,
-//   createOne,
-//   updateOne,
-//   deleteOne,
-// } = require('../controllers/countriesControllers.js');
 
-// const router = express.Router();
+const Router = express.Router();
 
-// router
-//   .route(`/api/countries`)
-//   .get(getAll)
-//   .post(
-//     [
-//       body('name').notEmpty().isString(),
-//       body('alpha2Code').notEmpty().isString().isLength({ min: 2, max: 2 }),
-//       body('alpha3Code').notEmpty().isString().isLength({ min: 3, max: 3 }),
-//     ],
-//     createOne
-//   );
-// router
-//   .route(`/api/countries/:code`)
-//   .get(getOne)
-//   .delete(deleteOne)
-//   .put(
-//     [
-//       body('name').notEmpty().isString(),
-//       body('alpha2Code').notEmpty().isString().isLength({ min: 2, max: 2 }),
-//       body('alpha3Code').notEmpty().isString().isLength({ min: 3, max: 3 }),
-//     ],
-//     updateOne
-//   );
+//====================================================================================================
+//for post and get all countries:
+//====================================================================================================
+Router.route('/')
+.get(getALlCountries) 
+.post(createCountry)
 
-// module.exports = router;
+//====================================================================================================
+//for delete, put and get one country:
+//====================================================================================================
+Router.route('/:code')
+.get (getOneCountry)
+.put (updateCountry)
+.delete (deleteCountry)
+
+export default Router;
